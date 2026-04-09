@@ -1,6 +1,7 @@
 import "./globals.css";
 import { Manrope, Inter } from "next/font/google";
 import Navbar from "../components/Navbar";
+import Footer from "../components/Footer";
 
 const manrope = Manrope({
   subsets: ["latin"],
@@ -33,6 +34,7 @@ export default function RootLayout({
       <body className="font-body selection:bg-secondary-container selection:text-on-secondary-container">
         <Navbar />
         <main className="pt-24">{children}</main>
+        <Footer />
       </body>
     </html>
   );

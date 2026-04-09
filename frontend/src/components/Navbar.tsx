@@ -1,4 +1,8 @@
 import Link from "next/link";
+import React from "react"; 
+import ShoppingBagIcon from "./icons/ShoppingBagIcon"; 
+import UserCircleIcon from "./icons/UserCircleIcon";
+
 
 export default function Navbar() {
   return (
@@ -46,10 +50,10 @@ export default function Navbar() {
 
         <div className="flex gap-4">
           <span className="material-symbols-outlined text-primary">
-            shopping_bag
+            <ShoppingBagIcon />
           </span>
           <span className="material-symbols-outlined text-primary">
-            account_circle
+            <UserCircleIcon />
           </span>
         </div>
 

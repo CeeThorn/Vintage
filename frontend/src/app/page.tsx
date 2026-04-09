@@ -1,25 +1,27 @@
 
 import Link from "next/link";
-
+import PrinterIcon from "../components/icons/PrinterIcon";
+import PackageIcon from "../components/icons/ShippingIcon";
+import TShirtIcon from "../components/icons/ShirtIcon";
 
 const workflowSteps = [
   {
     id: "01",
-    icon: "edit_square",
+    icon: <TShirtIcon />,
     title: "Design",
     description:
       "Upload your vision or create from curated studio assets.",
   },
   {
     id: "02",
-    icon: "print",
+    icon: <PrinterIcon />,
     title: "Print",
     description:
       "High-fidelity sustainable printing preserving fabric quality.",
   },
   {
     id: "03",
-    icon: "local_shipping",
+    icon: <PackageIcon />,
     title: "Arrive",
     description:
       "Hand-inspected garments shipped in eco-conscious packaging.",
@@ -30,73 +32,16 @@ export default function Home() {
   return (
     <main className="selection:bg-secondary-container selection:text-on-secondary-container">
 
-      {/* NAVBAR */}
-
-      <nav className="fixed top-0 left-0 right-0 z-50 bg-background backdrop-blur-md flex justify-between items-center px-8 py-6">
-
-        <div className="font-headline text-xl font-bold tracking-tighter text-on-background uppercase">
-          PrintWear
-        </div>
-
-        <div className="hidden md:flex gap-12 items-center">
-
-          <div className="flex gap-8">
-
-            <Link
-              href="/"
-              className="font-headline uppercase tracking-widest text-[11px] text-on-background font-bold border-b-2 border-primary pb-1 hover:-translate-y-0.5 transition"
-            >
-              Home
-            </Link>
-
-            <Link
-              href="/explore"
-              className="font-headline uppercase tracking-widest text-[11px] text-on-surface-variant hover:text-on-background hover:-translate-y-0.5 transition"
-            >
-              Explore
-            </Link>
-
-            <Link
-              href="/cart"
-              className="font-headline uppercase tracking-widest text-[11px] text-on-surface-variant hover:text-on-background hover:-translate-y-0.5 transition"
-            >
-              Cart
-            </Link>
-
-            <Link
-              href="/signin"
-              className="font-headline uppercase tracking-widest text-[11px] text-on-surface-variant hover:text-on-background hover:-translate-y-0.5 transition"
-            >
-              Sign In
-            </Link>
-
-          </div>
-
-          <div className="flex gap-4">
-
-            <span className="material-symbols-outlined text-primary">
-              shopping_bag
-            </span>
-
-            <span className="material-symbols-outlined text-primary">
-              account_circle
-            </span>
-
-          </div>
-
-        </div>
-
-        <span className="material-symbols-outlined md:hidden">
-          menu
-        </span>
-
-      </nav>
-
+    
 
       {/* HERO */}
 
       <section className="relative min-h-[921px] flex items-center px-8 md:px-20 overflow-hidden bg-background pt-32">
 
+  
+    {/*How flex works is that it produces a flexlayout between  the divs - pay attention to how many u are using*/}
+    <div className="flex flex-col md:flex-row items-center justify-between gap-8 max-w-6xl mx-auto">
+  {/* Left side - text content */}
         <div className="z-10 max-w-2xl">
 
           <span className="font-label uppercase tracking-widest text-[11px] text-on-surface-variant mb-6 block">
@@ -116,16 +61,24 @@ export default function Home() {
 
           <div className="flex gap-4 flex-wrap">
 
+
             <button className="bg-primary text-on-primary px-8 py-3 font-medium hover:bg-primary-dim transition">
               Start Designing
             </button>
 
-            <button className="bg-secondary-container text-on-secondary-container px-8 py-3 font-medium hover:-translate-y-0.5 transition">
-              View Lookbook
-            </button>
 
           </div>
+          </div>
 
+          {/*Right Side*/}
+          <div className="flex-1 flex justify-end ">
+           <img 
+            src= "cotton.jpg"
+            alt="Home Image"
+            className="max-w-[300px] w-full h-auto object-cover rounded-lg shadow-lg"
+           />
+        
+        </div>
         </div>
 
       </section>
@@ -238,31 +191,7 @@ export default function Home() {
       </section>
 
 
-      {/* FOOTER */}
-
-      <footer className="bg-surface-container-low py-12 px-8">
-
-        <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4">
-
-          <span className="font-body text-xs text-on-surface-variant">
-            © {new Date().getFullYear()} PrintWear
-          </span>
-
-          <div className="flex gap-6">
-
-            <span className="material-symbols-outlined text-on-surface-variant">
-              payments
-            </span>
-
-            <span className="material-symbols-outlined text-on-surface-variant">
-              public
-            </span>
-
-          </div>
-
-        </div>
-
-      </footer>
+    
 
     </main>
   );

@@ -1,5 +1,9 @@
+"use client"
+
 import Image from "next/image";
-import Navbar from "../../components/Navbar";
+import { useState, useEffect} from "react";
+
+
 
 const designTemplates = [
   {
@@ -55,10 +59,105 @@ const blankBases = [
   },
 ];
 
+const teesTemplates = [
+   {title: "Abstract Studio V1",
+    desc: "Hand-sketched fluid geometries.",
+    price: "$45.00",
+    img: "/images/black.jpg",
+   }, 
+
+   {title: "Abstract Studio V1",
+    desc: "Hand-sketched fluid geometries.",
+    price: "$45.00",
+    img: "/images/white.jpg",
+   },
+];
+
+const teesBlank = [
+    {title: "Abstract Studio V1",
+    desc: "Hand-sketched fluid geometries.",
+    price: "$45.00",
+    img: "/images/black.jpg",
+     label: "180GSM / Supima Cotton",
+   }, 
+   
+   {title: "Abstract Studio V1",
+    desc: "Hand-sketched fluid geometries.",
+    price: "$45.00",
+    img: "/images/white.jpg",
+     label: "180GSM / Supima Cotton",
+   },
+     {title: "Abstract Studio V1",
+    desc: "Hand-sketched fluid geometries.",
+    price: "$45.00",
+    img: "/images/black.jpg",
+     label: "180GSM / Supima Cotton",
+   }, 
+   
+   {title: "Abstract Studio V1",
+    desc: "Hand-sketched fluid geometries.",
+    price: "$45.00",
+    img: "/images/white.jpg",
+     label: "180GSM / Supima Cotton",
+   },
+
+];
+
+type Product = {
+  id?: string;
+  title: string;
+  desc: string;
+  price: number | string;
+  img: string;
+  label?: string | null;
+  type?: string;
+};
+
+
+
 export default function ExplorePage() {
+
+
+  const [currentTemplates, setCurrentTemplates] = useState(designTemplates);
+  const [currentBlanks, setCurrentBlanks] = useState<Product[]>([]);
+  const [products, setProducts] = useState<Product[]>([]);
+
+  useEffect(() => {
+    const loadProducts = async () => {
+      const res = await fetch("http://localhost:5000/products");
+      const data = await res.json();
+
+      const filter = data.filter((item: any) => item.type === "dees");
+
+      setProducts(data);
+      setCurrentBlanks(filter);
+    };
+
+    loadProducts();
+  
+  }, []);
+
+  const showTeesTemplates = () => {
+    setCurrentTemplates(teesTemplates);
+  };
+
+  const showDesignTemplates = () => {
+    setCurrentTemplates(designTemplates);
+  };
+
+  const showBlankBases = () => {
+    setCurrentBlanks(products.filter((item: any) => item.type === "dees"));
+  }
+
+  const showBlankTees = () => {
+    setCurrentBlanks(products.filter((item: any) => item.type === "tees"));
+  }
+
+
+
   return (
     <div>
-      <Navbar />
+    
 
       <main className="max-w-screen-2xl mx-auto px-8 pt-32 pb-32">
         {/* Hero */}
@@ -78,10 +177,12 @@ export default function ExplorePage() {
           </div>
         </header>
 
+
         {/* Filters */}
         <section className="mb-16 border-t border-outline-variant/10 pt-8 flex flex-col lg:flex-row lg:items-center justify-between gap-8">
           <div className="flex flex-wrap gap-x-12 gap-y-6">
             <div className="space-y-3">
+              {/*}
               <span className="font-label text-[0.65rem] uppercase tracking-widest text-on-surface-variant/70">
                 Template Style
               </span>
@@ -99,6 +200,7 @@ export default function ExplorePage() {
                   Team
                 </button>
               </div>
+              */}
             </div>
 
             <div className="space-y-3">
@@ -106,7 +208,11 @@ export default function ExplorePage() {
                 Apparel Type
               </span>
               <div className="flex gap-6">
-                <button className="font-body text-sm text-on-surface-variant hover:text-on-surface transition-colors pb-1">
+                 <button className="font-body text-sm text-on-surface-variant hover:text-on-surface transition-colors pb-1">
+                  All
+                </button>
+                <button onClick={() => { showTeesTemplates(); showBlankTees();}}
+                className="font-body text-sm text-on-surface-variant hover:text-on-surface transition-colors pb-1">
                   Tees
                 </button>
                 <button className="font-body text-sm text-on-surface-variant hover:text-on-surface transition-colors pb-1">
@@ -140,7 +246,7 @@ export default function ExplorePage() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-12 gap-10 items-start">
-            {designTemplates.map((item, i) => (
+            {currentTemplates.map((item, i) => (
               <div
                 key={i}
                 className={`${
@@ -186,7 +292,7 @@ export default function ExplorePage() {
             </h2>
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-x-8 gap-y-16">
-            {blankBases.map((item, i) => (
+            {currentBlanks.map((item, i) => (
               <div key={i} className="group">
                 <div className="relative aspect-[4/5] bg-surface-container-low mb-6 overflow-hidden rounded-sm">
                   <Image
